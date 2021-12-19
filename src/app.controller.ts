@@ -11,7 +11,8 @@ export class AppController {
 
   @Get()
   getHello(): any {
-    this.rabbitService.send('notification', this.appService.getMessage());
-    return this.appService.getMessage();
+    const message = this.appService.getMessage();
+    this.rabbitService.send('notification', message);
+    return message;
   }
 }

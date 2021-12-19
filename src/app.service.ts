@@ -3,12 +3,14 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class AppService {
   getMessage(): any {
-    const code = Date.now().toString().substring(7);
+    const correlation_id = Date.now().toString().substring(7);
+    const code = Date.now().toString().substring(9);
+    const type = this.getNotificationType();
     const notificationResponse = {
-      to: '+989124109855',
-      type: this.getNotificationType(),
+      to: type === 'mail' ? 'mohamad.karimisalim@gmail.com' : '+989124109855',
+      type: type,
       message: 'your activation code is: ' + code,
-      correlation_id: code,
+      correlation_id: correlation_id,
     };
 
     return notificationResponse;
